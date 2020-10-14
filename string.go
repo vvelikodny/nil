@@ -11,24 +11,24 @@ type String interface {
 	Value() string
 }
 
-// nilString holds data of nullable string.
-type nilString struct {
+// nullString holds data of nullable string.
+type nullString struct {
 	Valid       bool
 	StringValue string
 }
 
 // Nil
-func (s nilString) Nil() bool {
+func (s nullString) Null() bool {
 	return !s.Valid
 }
 
 // Value
-func (s nilString) Value() string {
+func (s nullString) Value() string {
 	return s.StringValue
 }
 
 // String
-func (s nilString) String() string {
+func (s nullString) String() string {
 	if !s.Valid {
 		return "nil"
 	}
@@ -36,7 +36,7 @@ func (s nilString) String() string {
 }
 
 // MarshalJSON
-func (s nilString) MarshalJSON() ([]byte, error) {
+func (s nullString) MarshalJSON() ([]byte, error) {
 	if !s.Valid {
 		return []byte("null"), nil
 	}
@@ -45,9 +45,9 @@ func (s nilString) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON
-func (s *nilString) UnmarshalJSON(data []byte) error {
+func (s *nullString) UnmarshalJSON(data []byte) error {
 	if bytes.Equal(data, []byte("null")) {
-		*s = nilString{}
+		*s = nullString{}
 		return nil
 	}
 
@@ -58,22 +58,22 @@ func (s *nilString) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	*s = nilString{StringValue: res, Valid: true}
+	*s = nullString{StringValue: res, Valid: true}
 
 	return nil
 }
 
-// NewNilString creates new nil string value.
-func NewNilString() String {
-	return &nilString{
+// NewNullString creates new nil string value.
+func NewNullString() String {
+	return &nullString{
 		Valid:       false,
 		StringValue: "",
 	}
 }
 
-// NewNilString creates new string value.
+// NewNullString creates new string value.
 func NewString(value string) String {
-	return &nilString{
+	return &nullString{
 		Valid:       true,
 		StringValue: value,
 	}
