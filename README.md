@@ -19,12 +19,12 @@ type Json struct {
 }
 
 func main() {
-	str1 := null.NewNilString()
+	str1 := null.NewNullString()
 	str2 := null.NewString("value")
 
 	var b bytes.Buffer
 	json.NewEncoder(&b).Encode(Json{
-		Field: null.NewNilString(),
+		Field: null.NewNullString(),
 	})
 	// `{"field":null}`
 	fmt.Println(b.String())
