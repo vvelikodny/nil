@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/vvelikodny/null.svg?branch=master)](https://travis-ci.com/vvelikodny/null)
+[![Build Status](https://travis-ci.com/vvelikodny/null.svg?branch=main)](https://travis-ci.com/vvelikodny/null)
 
 # null
 Golang nullable immutable structures to avoid pointers for nil values
