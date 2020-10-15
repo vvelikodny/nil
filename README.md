@@ -1,6 +1,10 @@
 # null
 Golang nullable immutable structures to avoid pointers for nil values
 
+# status
+
+development in progress
+
 # Usage
 
 ```golang
