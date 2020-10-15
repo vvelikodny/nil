@@ -1,5 +1,5 @@
 # null
-Golang handy immutable nullable structures to avoid pointers for nil values
+Golang handy nullable immutable structures to avoid pointers for nil values
 
 # Usage
 
