@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	"github.com/vvelikodny/null"
@@ -21,15 +22,29 @@ func TestNilString(t *testing.T) {
 	require.Equal(t, "value", fmt.Sprint(str2))
 }
 
-type Json struct {
-	Field null.String `json:"field"`
+type Json1 struct {
+	Field null.String `json:"field,omitempty"`
+}
+
+func TestUnmarshalJsonWithNullString(t *testing.T) {
+	var j Json1
+	require.NoError(t, json.NewDecoder(bytes.NewBufferString(`{}`)).Decode(&j))
+
+	assert.Equal(t, Json1{
+		Field: null.NewNullString(),
+	}, j)
+
+	require.NoError(t, json.NewDecoder(bytes.NewBufferString(`{"field":null}`)).Decode(&j))
+	assert.Equal(t, Json1{
+		Field: null.NewNullString(),
+	}, j)
 }
 
 func TestJsonWithNullString(t *testing.T) {
 	var b bytes.Buffer
-	require.NoError(t, json.NewEncoder(&b).Encode(Json{
+	require.NoError(t, json.NewEncoder(&b).Encode(Json1{
 		Field: null.NewNullString(),
 	}))
-	require.Equal(t, `{"field":null}
+	assert.Equal(t, `{"field":null}
 `, b.String())
 }
