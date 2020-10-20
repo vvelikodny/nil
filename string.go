@@ -5,49 +5,43 @@ import (
 	"encoding/json"
 )
 
-// String represents nullable string value.
-type String interface {
-	Nullable
-	Value() string
-}
-
-// nullString holds data of nullable string.
-type nullString struct {
-	Valid       bool
-	StringValue string
+// String holds data of nullable string.
+type String struct {
+	valid       bool
+	stringValue string
 }
 
 // Nil
-func (s nullString) Null() bool {
-	return !s.Valid
+func (s String) Null() bool {
+	return !s.valid
 }
 
 // Value
-func (s nullString) Value() string {
-	return s.StringValue
+func (s String) Value() string {
+	return s.stringValue
 }
 
 // String
-func (s nullString) String() string {
-	if !s.Valid {
+func (s String) String() string {
+	if !s.valid {
 		return "nil"
 	}
-	return s.StringValue
+	return s.stringValue
 }
 
 // MarshalJSON
-func (s nullString) MarshalJSON() ([]byte, error) {
-	if !s.Valid {
+func (s String) MarshalJSON() ([]byte, error) {
+	if !s.valid {
 		return []byte("null"), nil
 	}
 
-	return json.Marshal(s.StringValue)
+	return json.Marshal(s.stringValue)
 }
 
 // UnmarshalJSON
-func (s *nullString) UnmarshalJSON(data []byte) error {
+func (s *String) UnmarshalJSON(data []byte) error {
 	if bytes.Equal(data, []byte("null")) {
-		*s = nullString{}
+		*s = String{}
 		return nil
 	}
 
@@ -58,23 +52,23 @@ func (s *nullString) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	*s = nullString{StringValue: res, Valid: true}
+	*s = String{stringValue: res, valid: true}
 
 	return nil
 }
 
 // NewNullString creates new nil string value.
 func NewNullString() String {
-	return &nullString{
-		Valid:       false,
-		StringValue: "",
+	return String{
+		valid:       false,
+		stringValue: "",
 	}
 }
 
 // NewNullString creates new string value.
 func NewString(value string) String {
-	return &nullString{
-		Valid:       true,
-		StringValue: value,
+	return String{
+		valid:       true,
+		stringValue: value,
 	}
 }
