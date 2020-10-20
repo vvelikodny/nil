@@ -7,8 +7,8 @@ import (
 
 // String holds data of nullable string.
 type String struct {
-	valid       bool
-	stringValue string
+	valid bool
+	value string
 }
 
 // Nil
@@ -18,7 +18,7 @@ func (s String) Null() bool {
 
 // Value
 func (s String) Value() string {
-	return s.stringValue
+	return s.value
 }
 
 // String
@@ -26,7 +26,7 @@ func (s String) String() string {
 	if !s.valid {
 		return "nil"
 	}
-	return s.stringValue
+	return s.value
 }
 
 // MarshalJSON
@@ -35,7 +35,7 @@ func (s String) MarshalJSON() ([]byte, error) {
 		return []byte("null"), nil
 	}
 
-	return json.Marshal(s.stringValue)
+	return json.Marshal(s.value)
 }
 
 // UnmarshalJSON
@@ -52,7 +52,7 @@ func (s *String) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	*s = String{stringValue: res, valid: true}
+	*s = String{value: res, valid: true}
 
 	return nil
 }
@@ -60,15 +60,15 @@ func (s *String) UnmarshalJSON(data []byte) error {
 // NewNullString creates new nil string value.
 func NewNullString() String {
 	return String{
-		valid:       false,
-		stringValue: "",
+		valid: false,
+		value: "",
 	}
 }
 
 // NewNullString creates new string value.
 func NewString(value string) String {
 	return String{
-		valid:       true,
-		stringValue: value,
+		valid: true,
+		value: value,
 	}
 }
