@@ -1,9 +1,61 @@
 package null
 
+import (
+	"bytes"
+	"encoding/json"
+	"strconv"
+)
+
 // Int32 holds data of nullable int32 value.
 type Int32 struct {
 	valid bool
 	value int32
+}
+
+// Nil
+func (s Int32) Null() bool {
+	return !s.valid
+}
+
+// Value
+func (s Int32) Value() int32 {
+	return s.value
+}
+
+// String returns string representation of nillable value.
+func (s Int32) String() string {
+	if !s.valid {
+		return "nil"
+	}
+	return strconv.FormatInt(int64(s.value), 10)
+}
+
+// MarshalJSON
+func (s Int32) MarshalJSON() ([]byte, error) {
+	if !s.valid {
+		return []byte("null"), nil
+	}
+
+	return json.Marshal(s.value)
+}
+
+// UnmarshalJSON
+func (s *Int32) UnmarshalJSON(data []byte) error {
+	if bytes.Equal(data, []byte("null")) {
+		*s = Int32{}
+		return nil
+	}
+
+	var res int32
+
+	err := json.Unmarshal(data, &res)
+	if err != nil {
+		return err
+	}
+
+	*s = Int32{value: res, valid: true}
+
+	return nil
 }
 
 // NewNullInt32 creates new nil int32 value.
