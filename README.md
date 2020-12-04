@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/vvelikodny/null.svg?branch=main)](https://travis-ci.com/vvelikodny/null)
 
-# null
+# go-null
 Golang immutable nilable structures to avoid pointers for nil values.
 
 # status
@@ -17,7 +17,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/vvelikodny/null"
+	"github.com/vvelikodny/go-null"
 )
 
 type Json struct {
