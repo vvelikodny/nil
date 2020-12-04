@@ -41,8 +41,8 @@ func main() {
     fmt.Println("nil? ", value.Nil())
 
     b = true
-	value := nil.FromBoolPtr(&b)
+    value := nil.FromBoolPtr(&b)
     // `nil? false`
-	fmt.Println("nil?", value.Nil())
+    fmt.Println("nil?", value.Nil())
 }
 ```
