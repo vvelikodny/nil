@@ -1,4 +1,4 @@
-package null
+package nil
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ type Int32 struct {
 }
 
 // Nil
-func (s Int32) Null() bool {
+func (s Int32) Nil() bool {
 	return !s.valid
 }
 
@@ -58,8 +58,8 @@ func (s *Int32) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// NewNullInt32 creates new nil int32 value.
-func NewNullInt32() Int32 {
+// NewNilInt32 creates new nil int32 value.
+func NewNilInt32() Int32 {
 	return Int32{
 		valid: false,
 		value: 0,
@@ -72,4 +72,12 @@ func NewInt32(value int32) Int32 {
 		valid: true,
 		value: value,
 	}
+}
+
+func FromInt32Ptr(value *int32) Int32 {
+	if value == nil {
+		return NewNilInt32()
+	}
+
+	return NewInt32(*value)
 }

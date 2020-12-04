@@ -1,4 +1,4 @@
-package null
+package nil
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ type Float64 struct {
 }
 
 // Nil
-func (s Float64) Null() bool {
+func (s Float64) Nil() bool {
 	return !s.valid
 }
 
@@ -58,8 +58,8 @@ func (s *Float64) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// NewNullFloat64 creates new nil float64 value.
-func NewNullFloat64() Float64 {
+// NewNilFloat64 creates new nil float64 value.
+func NewNilFloat64() Float64 {
 	return Float64{
 		valid: false,
 		value: 0,
@@ -72,4 +72,12 @@ func NewFloat64(value float64) Float64 {
 		valid: true,
 		value: value,
 	}
+}
+
+func FromFloat64Ptr(value *float64) Float64 {
+	if value == nil {
+		return NewNilFloat64()
+	}
+
+	return NewFloat64(*value)
 }

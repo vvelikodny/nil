@@ -1,4 +1,4 @@
-package null
+package nil
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ type Bool struct {
 }
 
 // Nil
-func (s Bool) Null() bool {
+func (s Bool) Nil() bool {
 	return !s.valid
 }
 
@@ -58,8 +58,8 @@ func (s *Bool) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// NewNullBool creates new nil bool value.
-func NewNullBool() Bool {
+// NewNilBool creates new nil bool value.
+func NewNilBool() Bool {
 	return Bool{
 		valid: false,
 		value: false,
@@ -72,4 +72,12 @@ func NewBool(value bool) Bool {
 		valid: true,
 		value: value,
 	}
+}
+
+func FromBoolPtr(value *bool) Bool {
+	if value == nil {
+		return NewNilBool()
+	}
+
+	return NewBool(*value)
 }
