@@ -14,11 +14,11 @@ import (
 
 func TestNilString(t *testing.T) {
 	str1 := nil.NewNilString()
-	require.True(t, str1.Valid())
+	require.True(t, str1.Nil())
 	require.Equal(t, "nil", fmt.Sprint(str1))
 
 	str2 := nil.NewString("value")
-	require.False(t, str2.Valid())
+	require.False(t, str2.Nil())
 	require.Equal(t, "value", fmt.Sprint(str2))
 }
 

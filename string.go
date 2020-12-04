@@ -12,7 +12,7 @@ type String struct {
 }
 
 // Nil
-func (s String) Valid() bool {
+func (s String) Nil() bool {
 	return !s.valid
 }
 
