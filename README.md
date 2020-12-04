@@ -25,21 +25,21 @@ type Json struct {
 }
 
 func main() {
-	str1 := nil.NewNilString()
-	str2 := nil.NewString("value")
-
-	var b bytes.Buffer
-	json.NewEncoder(&b).Encode(Json{
-		Field: null.NewNilString(),
-	})
-	// `{"field":null}`
-	fmt.Println(b.String())
-
+    str1 := nil.NewNilString()
+    str2 := nil.NewString("value")
+    
+    var b bytes.Buffer
+    json.NewEncoder(&b).Encode(Json{
+        Field: null.NewNilString(),
+    })
+    // `{"field":null}`
+    fmt.Println(b.String())
+    
     var b *bool
     value := nil.FromBoolPtr(b)
     // `nil? true`
     fmt.Println("nil? ", value.Nil())
-
+    
     b = true
     value := nil.FromBoolPtr(&b)
     // `nil? false`
