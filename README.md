@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/vvelikodny/null.svg?branch=main)](https://travis-ci.com/vvelikodny/null)
 
-# go-null
+# nil
 Golang immutable nilable structures to avoid pointers for nil values.
 
 # status
@@ -17,22 +17,32 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/vvelikodny/go-null"
+	"github.com/vvelikodny/nil"
 )
 
 type Json struct {
-	Field null.String `json:"field"`
+	Field nil.String `json:"field"`
 }
 
 func main() {
-	str1 := null.NewNullString()
-	str2 := null.NewString("value")
+	str1 := nil.NewNilString()
+	str2 := nil.NewString("value")
 
 	var b bytes.Buffer
 	json.NewEncoder(&b).Encode(Json{
-		Field: null.NewNullString(),
+		Field: null.NewNilString(),
 	})
 	// `{"field":null}`
 	fmt.Println(b.String())
+
+    var b *bool
+    value := nil.FromBoolPtr(b)
+    // `nil? true`
+    fmt.Println("nil? ", value.Nil())
+
+    b = true
+	value := nil.FromBoolPtr(&b)
+    // `nil? false`
+	fmt.Println("nil?", value.Nil())
 }
 ```

@@ -1,4 +1,4 @@
-package null
+package nil
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ type Int64 struct {
 }
 
 // Nil returns true of nil value, otherwise - false.
-func (s Int64) Null() bool {
+func (s Int64) Nil() bool {
 	return !s.valid
 }
 
@@ -58,8 +58,8 @@ func (s *Int64) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// NewNullInt64 creates new nil int64 value.
-func NewNullInt64() Int64 {
+// NewNilInt64 creates new nil int64 value.
+func NewNilInt64() Int64 {
 	return Int64{
 		valid: false,
 		value: 0,
@@ -72,4 +72,12 @@ func NewInt64(value int64) Int64 {
 		valid: true,
 		value: value,
 	}
+}
+
+func FromInt64Ptr(value *int64) Int64 {
+	if value == nil {
+		return NewNilInt64()
+	}
+
+	return NewInt64(*value)
 }

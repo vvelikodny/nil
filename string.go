@@ -1,4 +1,4 @@
-package null
+package nil
 
 import (
 	"bytes"
@@ -12,7 +12,7 @@ type String struct {
 }
 
 // Nil
-func (s String) Null() bool {
+func (s String) Valid() bool {
 	return !s.valid
 }
 
@@ -57,18 +57,26 @@ func (s *String) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// NewNullString creates new nil string value.
-func NewNullString() String {
+// NewNilString creates new nil string value.
+func NewNilString() String {
 	return String{
 		valid: false,
 		value: "",
 	}
 }
 
-// NewNullString creates new string value.
+// NewString creates new nil string value.
 func NewString(value string) String {
 	return String{
 		valid: true,
 		value: value,
 	}
+}
+
+func FromStringPtr(value *string) String {
+	if value == nil {
+		return NewNilString()
+	}
+
+	return NewString(*value)
 }

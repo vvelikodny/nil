@@ -1,4 +1,4 @@
-package null
+package nil
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ type Int struct {
 }
 
 // Nil
-func (s Int) Null() bool {
+func (s Int) Nil() bool {
 	return !s.valid
 }
 
@@ -58,8 +58,8 @@ func (s *Int) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// NewNullInt creates new nil int value.
-func NewNullInt() Int {
+// NewNilInt creates new nil int value.
+func NewNilInt() Int {
 	return Int{
 		valid: false,
 		value: 0,
@@ -72,4 +72,12 @@ func NewInt(value int) Int {
 		valid: true,
 		value: value,
 	}
+}
+
+func FromIntPtr(value *int) Int {
+	if value == nil {
+		return NewNilInt()
+	}
+
+	return NewInt(*value)
 }

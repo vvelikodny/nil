@@ -1,4 +1,4 @@
-module github.com/vvelikodny/null
+module github.com/vvelikodny/nil
 
 go 1.14
 
