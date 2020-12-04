@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/vvelikodny/null.svg?branch=main)](https://travis-ci.com/vvelikodny/null)
 
 # null
-Golang immutable nullable structures to avoid pointers for nil values.
+Golang immutable nilable structures to avoid pointers for nil values.
 
 # status
 
